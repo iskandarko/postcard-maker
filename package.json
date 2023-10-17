@@ -1,0 +1,22 @@
+{
+  "name": "postcard-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build-mac": "electron-packager . postcard-maker --platform=darwin --overwrite",
+    "build-win": "electron-packager . postcard-maker --platform=win32 --overwrite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "dom-to-image": "^2.6.0"
+  }
+}

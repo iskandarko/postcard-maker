@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Postcard Maker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <script src="vendor/vue.main.js"></script>
+    <script src="node_modules/dom-to-image/dist/dom-to-image.min.js"></script>
+	</head>
+	<body>
+    <div class="container" id="app">
+      <div class="canvas">
+        <div class="decor"></div>
+        <div class="content">
+          <div class="name">
+            <h1>{{ isSingle ? (isWoman ? 'Дорогая' : 'Дорогой' ) : 'Дорогие' }} {{ name }},</h1>
+          </div>
+          <div class="message">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="input-form">
+        <label for="name">Кому</label>
+        <textarea v-model="name" name="message" id="name" cols="30" rows="3"></textarea>
+        <br>
+        <div>
+          <input type="checkbox" id="isSingle" v-model="isSingle" />
+          <label for="isSingle">Один гость</label>
+        </div>
+        <div v-if="isSingle">
+          <input type="checkbox" id="isWoman" v-model="isWoman" />
+          <label for="isWoman">Женщина</label>
+        </div>
+        <br>
+        <label for="message">Сообщение</label>
+        <textarea v-model="message" name="message" id="message" cols="30" rows="10"></textarea>
+        <br>
+        <button id="save" @click="save">Сохранить</button>
+      </div>
+    </div>
+  <body>
+
+    <script>
+      const { createApp, ref } = Vue
+
+      createApp({
+        setup() {
+          const name = ref('')
+          const message = ref('Приглашаем вас на праздник, посвященный юбилею Матлубы, который состоится 21 октября 2023 г. в 16-00 в ресторане «Чайка» по адресу: Краснопресненская набережная 12а.')
+          const isSingle = ref(false)
+          const isWoman = ref(false)
+          const save = () => {
+            domtoimage.toJpeg(document.querySelector('.canvas'), { quality: 1 })
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = name.value ? `${name.value.replace(/\s/g, "-")}.jpeg` : 'my-image-name.jpeg';
+                link.href = dataUrl;
+                link.click();
+            });
+          }
+
+          return {
+            name,
+            message,
+            isSingle,
+            isWoman,
+            save
+          }
+        }
+      }).mount('#app')
+    </script>
+	</body>
+</html>

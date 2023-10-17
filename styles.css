@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+}
+
+.canvas {
+  font-family: 'Lobster', serif;
+  position: relative;
+  background: url(images/luba.jpeg) no-repeat center center / cover;
+  /* background: ; */
+  height: 800px;
+  width: 600px;
+}
+
+.decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url(images/decorations.png) no-repeat center center / 154% 119%;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+  padding: 0 3rem 2rem;
+  color: white;
+}
+
+.message {
+  font-size: 1.5em;
+  text-align: justify;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: lightgrey;
+}
